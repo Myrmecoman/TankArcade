@@ -179,7 +179,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1052300482}
   - component: {fileID: 1052300483}
-  - component: {fileID: 1052300481}
   - component: {fileID: 1052300480}
   m_Layer: 0
   m_Name: NetworkingManager
@@ -197,47 +196,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1052300479}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 1554712238, guid: 01701b64234b4d523d8045142cbc73fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MessageBufferSize: 5120
-  MaxConnections: 100
-  ConnectAddress: 127.0.0.1
-  ConnectPort: 7777
-  ServerListenPort: 7777
-  ServerWebsocketListenPort: 8887
-  SupportWebsocket: 0
-  Channels: []
-  UseMLAPIRelay: 0
-  MLAPIRelayAddress: 184.72.104.138
-  MLAPIRelayPort: 8888
---- !u!114 &1052300481
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1052300479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1682170820, guid: 01701b64234b4d523d8045142cbc73fa, type: 3}
+  m_Script: {fileID: 11500000, guid: f6aac8daa3e18984181c44d448d20817, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   DontDestroy: 1
   RunInBackground: 1
-  LogLevel: 0
+  LogLevel: 1
   NetworkConfig:
     ProtocolVersion: 0
-    NetworkTransport: {fileID: 1052300480}
-    RegisteredScenes:
-    - Lobby
+    NetworkTransport: {fileID: 0}
+    RegisteredScenes: []
     AllowRuntimeSceneChanges: 0
-    NetworkedPrefabs:
-    - Prefab: {fileID: 5301633512716771798, guid: b7d3430ae6cb02048bf5ce6b547dc871,
-        type: 3}
-      PlayerPrefab: 1
+    NetworkedPrefabs: []
     PlayerPrefabHash:
-      Value: 15714336265186944586
+      Value: 0
     CreatePlayerPrefab: 1
     ReceiveTickrate: 64
     MaxReceiveEventsPerTickRate: 500
