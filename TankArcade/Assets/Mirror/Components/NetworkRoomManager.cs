@@ -363,13 +363,13 @@ namespace Mirror
         {
             if (string.IsNullOrEmpty(RoomScene))
             {
-                Debug.LogError("NetworkRoomManager RoomScene is empty. Set the RoomScene in the inspector for the NetworkRoomManager");
+                Debug.LogError("NetworkRoomManager RoomScene is empty. Set the RoomScene in the inspector for the NetworkRoomMangaer");
                 return;
             }
 
             if (string.IsNullOrEmpty(GameplayScene))
             {
-                Debug.LogError("NetworkRoomManager PlayScene is empty. Set the PlayScene in the inspector for the NetworkRoomManager");
+                Debug.LogError("NetworkRoomManager PlayScene is empty. Set the PlayScene in the inspector for the NetworkRoomMangaer");
                 return;
             }
 
