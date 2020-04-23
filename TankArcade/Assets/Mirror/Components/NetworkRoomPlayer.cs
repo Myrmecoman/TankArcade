@@ -138,16 +138,8 @@ namespace Mirror
             {
                 GUILayout.BeginArea(new Rect(20f, 300f, 120f, 20f));
 
-                if (readyToBegin)
-                {
-                    if (GUILayout.Button("Cancel"))
-                        CmdChangeReadyState(false);
-                }
-                else
-                {
-                    if (GUILayout.Button("Ready"))
-                        CmdChangeReadyState(true);
-                }
+                if (!readyToBegin)
+                    CmdChangeReadyState(true);
 
                 GUILayout.EndArea();
             }
@@ -163,14 +155,6 @@ namespace Mirror
                 GUILayout.Label("Ready");
             else
                 GUILayout.Label("Not Ready");
-
-            if (((isServer && index > 0) || isServerOnly) && GUILayout.Button("REMOVE"))
-            {
-                // This button only shows on the Host for all players other than the Host
-                // Host and Players can't remove themselves (stop the client instead)
-                // Host can kick a Player this way.
-                GetComponent<NetworkIdentity>().connectionToClient.Disconnect();
-            }
 
             GUILayout.EndArea();
         }
