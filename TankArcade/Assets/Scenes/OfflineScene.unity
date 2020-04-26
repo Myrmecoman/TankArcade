@@ -318,7 +318,7 @@ MonoBehaviour:
   networkAddress: 192.168.1.44
   maxConnections: 2
   authenticator: {fileID: 0}
-  playerPrefab: {fileID: 1480027675339556, guid: 21daf89214c6ee443ad6875b73083c60,
+  playerPrefab: {fileID: 7723984770816744226, guid: 553faac9312bed544886481f91969a0b,
     type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 1
