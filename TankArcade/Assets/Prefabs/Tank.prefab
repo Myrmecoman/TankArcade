@@ -341,6 +341,7 @@ MonoBehaviour:
   speed: 10
   gravity: 9.8
   maxVelocityChange: 10
+  turret: {fileID: 8537811288076164836}
 --- !u!1 &8310781493808541184
 GameObject:
   m_ObjectHideFlags: 0
