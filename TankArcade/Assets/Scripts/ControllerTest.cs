@@ -39,7 +39,7 @@ public class ControllerTest : MonoBehaviour
 		{
 			Debug.Log("shoot");
 			reloadTime = 0;
-			Instantiate(shell, shellPos.position, shellPos.rotation);
+			Instantiate(shell, shellPos.position, shellPos.rotation, null);
 		}
 	}
 
