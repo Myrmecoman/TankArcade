@@ -11,6 +11,8 @@ public class ControllerTest : MonoBehaviour
 	public Camera cam;
 	public Transform turret;
 	public Transform camPivot;
+	public GameObject shell;
+	public Transform shellPos;
 
 	private bool grounded = false;
 	private int horizontal;
@@ -18,19 +20,26 @@ public class ControllerTest : MonoBehaviour
 	private int value;
 	private Rigidbody rig;
 
+	//stats
+	private float health = 100;
+	private float reloadTime = 0.5f;
+
 
 	void Awake()
 	{
 		rig = GetComponent<Rigidbody>();
-		//rig.freezeRotation = true;
 	}
 
 
 	void Update()
 	{
-		if (Input.GetMouseButton(0))
+		if (reloadTime < 0.5)
+			reloadTime += Time.deltaTime;
+		if (Input.GetMouseButton(0) && reloadTime >= 0.5)
 		{
 			Debug.Log("shoot");
+			reloadTime = 0;
+			Instantiate(shell, shellPos.position, shellPos.rotation);
 		}
 	}
 
@@ -99,5 +108,15 @@ public class ControllerTest : MonoBehaviour
 	void OnCollisionStay()
 	{
 		grounded = true;
+	}
+
+
+	public void HitbyShell(float dmg)
+	{
+		health -= dmg;
+		if(health <= 0)
+		{
+			Debug.Log("tank destroyed");
+		}
 	}
 }
