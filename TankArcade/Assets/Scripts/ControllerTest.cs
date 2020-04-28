@@ -17,7 +17,6 @@ public class ControllerTest : MonoBehaviour
 	private bool grounded = false;
 	private int horizontal;
 	private int vertical;
-	private int value;
 	private Rigidbody rig;
 
 	//stats
@@ -41,20 +40,12 @@ public class ControllerTest : MonoBehaviour
 			reloadTime = 0;
 			Instantiate(shell, shellPos.position, shellPos.rotation, null);
 		}
+		camPivot.position = transform.position;
 	}
 
 
 	void FixedUpdate()
 	{
-		// camera rotation
-		value = 0;
-		if (Input.GetKey(KeyCode.A))
-			value = -1;
-		if (Input.GetKey(KeyCode.E))
-			value = 1;
-		camPivot.eulerAngles = new Vector3(0, camPivot.eulerAngles.y + value * Time.fixedDeltaTime * 150, 0);
-		camPivot.position = transform.position;
-
 		// turret look at mouse
 		Plane playerPlane = new Plane(Vector3.up, turret.position);
 		Ray ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -117,6 +108,7 @@ public class ControllerTest : MonoBehaviour
 		if(health <= 0)
 		{
 			Debug.Log("tank destroyed");
+			Destroy(this);
 		}
 	}
 }
