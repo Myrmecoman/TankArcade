@@ -12,7 +12,8 @@ public class BotController : MonoBehaviour
 	public GameObject shell;
 	public Transform shellPos;
 	public Material MatDestroyed;
-	
+	public HealthBar healthBar;
+
 	private bool grounded = false;
 	private int horizontal;
 	private int vertical;
@@ -104,10 +105,12 @@ public class BotController : MonoBehaviour
 	public void HitbyShell(float dmg)
 	{
 		health -= dmg;
+		healthBar.SetHealth(health);
 		if (health <= 0)
 		{
 			Debug.Log("tank destroyed");
 			gameObject.tag = "Untagged";
+			Destroy(healthBar.gameObject);
 
 			// setting all mats to destroyed
 			// hull

@@ -29,8 +29,7 @@ public class Bullet : MonoBehaviour
     {
         if (collision.transform.tag == "Player")
         {
-            Debug.Log("hit player");
-            if(collision.transform.GetComponent<ControllerTest>())
+            if (collision.transform.GetComponent<ControllerTest>())
                 collision.transform.GetComponent<ControllerTest>().HitbyShell(damage);
             else
                 collision.transform.GetComponent<BotController>().HitbyShell(damage);
