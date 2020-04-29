@@ -15,11 +15,13 @@ public class ControllerTest : MonoBehaviour
 	public Transform shellPos;
 	public Material MatDestroyed;
 	public HealthBar healthBar;
+	public GameObject Smoke;
 
 	private bool grounded = false;
 	private int horizontal;
 	private int vertical;
 	private Rigidbody rig;
+	private CameraShake shake;
 
 	//stats
 	private float health = 100;
@@ -29,6 +31,7 @@ public class ControllerTest : MonoBehaviour
 	void Awake()
 	{
 		rig = GetComponent<Rigidbody>();
+		shake = GetComponent<CameraShake>();
 	}
 
 
@@ -112,6 +115,8 @@ public class ControllerTest : MonoBehaviour
 			Debug.Log("tank destroyed");
 			gameObject.tag = "Untagged";
 			Destroy(healthBar.gameObject);
+			shake.shakeDuration = 0.2f;
+			Instantiate(Smoke, turret.position, transform.rotation, turret);
 
 			// setting all mats to destroyed
 			// hull

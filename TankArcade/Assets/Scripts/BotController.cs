@@ -13,6 +13,7 @@ public class BotController : MonoBehaviour
 	public Transform shellPos;
 	public Material MatDestroyed;
 	public HealthBar healthBar;
+	public GameObject Smoke;
 
 	private bool grounded = false;
 	private int horizontal;
@@ -111,6 +112,7 @@ public class BotController : MonoBehaviour
 			Debug.Log("tank destroyed");
 			gameObject.tag = "Untagged";
 			Destroy(healthBar.gameObject);
+			Instantiate(Smoke, turret.position, transform.rotation, turret);
 
 			// setting all mats to destroyed
 			// hull

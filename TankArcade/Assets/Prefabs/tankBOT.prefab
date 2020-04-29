@@ -344,6 +344,7 @@ MonoBehaviour:
   shellPos: {fileID: 8166806385913970065}
   MatDestroyed: {fileID: 2100000, guid: 403ddeb1073286742a3fa5b0332edb62, type: 2}
   healthBar: {fileID: 8932833972430232936}
+  Smoke: {fileID: 5646485476504851485, guid: a2cad7838f439fa47af8f7b2a62f3f37, type: 3}
 --- !u!65 &3358436960822863231
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -355,8 +356,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.3999999, y: 2.79045, z: 5.843398}
-  m_Center: {x: 0, y: -0.4183483, z: 0.106287956}
+  m_Size: {x: 3.3999999, y: 3.7, z: 5.843398}
+  m_Center: {x: 0, y: 0, z: 0.106287956}
 --- !u!1 &8932833971475567994
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,6 +537,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
+  isBot: 1
 --- !u!1 &8932833971826134238
 GameObject:
   m_ObjectHideFlags: 0
