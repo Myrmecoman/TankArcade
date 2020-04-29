@@ -13,9 +13,9 @@ public class BotController : MonoBehaviour
 	public Transform shellPos;
 	public Material MatDestroyed;
 	
-	private bool grounded = false;/*
+	private bool grounded = false;
 	private int horizontal;
-	private int vertical;*/
+	private int vertical;
 	private Rigidbody rig;
 	private Transform playerPos;
 
@@ -54,12 +54,12 @@ public class BotController : MonoBehaviour
 		Quaternion targetRotation = Quaternion.LookRotation(playerPos.position - turret.position);
 		turret.rotation = Quaternion.RotateTowards(turret.rotation, targetRotation, 180 * Time.fixedDeltaTime);
 
-		/*
 		// tank movements
 		if (grounded)
 		{
 			horizontal = 0;
 			vertical = 0;
+			/*
 			if (Input.GetKey(KeyCode.Z))
 				vertical = 1;
 			if (Input.GetKey(KeyCode.S))
@@ -78,6 +78,7 @@ public class BotController : MonoBehaviour
 				else
 					horizontal = 1;
 			}
+			*/
 			transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + horizontal * Time.fixedDeltaTime * 150, 0);
 			Vector3 targetVelocity = new Vector3(0, 0, vertical);
 			targetVelocity = transform.TransformDirection(targetVelocity);
@@ -89,7 +90,7 @@ public class BotController : MonoBehaviour
 			velocityChange.y = 0;
 			rig.AddForce(velocityChange, ForceMode.VelocityChange);
 		}
-		*/
+		
 		grounded = false;
 	}
 

@@ -689,7 +689,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5754066211983529758}
-  m_Material: {fileID: 13400000, guid: b8152e68613188c4db95641b9645a8a4, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -774,8 +774,10 @@ GameObject:
   - component: {fileID: 8789648792128389806}
   - component: {fileID: 3082593456330833495}
   - component: {fileID: 3673605126902827662}
-  - component: {fileID: 3673605126902827661}
   - component: {fileID: 3673605126902827660}
+  - component: {fileID: 3673605126902827661}
+  - component: {fileID: 3673605126902827664}
+  - component: {fileID: 3673605126902827663}
   m_Layer: 0
   m_Name: chassis
   m_TagString: Player
@@ -810,7 +812,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3673605126902827659}
-  m_Material: {fileID: 13400000, guid: b8152e68613188c4db95641b9645a8a4, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -832,6 +834,32 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!65 &3673605126902827663
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3673605126902827659}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.3999999, y: 2.79045, z: 0.1}
+  m_Center: {x: 0, y: -0.4183483, z: 0.106287956}
+--- !u!65 &3673605126902827664
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3673605126902827659}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 2.79045, z: 5.843398}
+  m_Center: {x: 0, y: -0.4183483, z: 0.106287956}
 --- !u!1 &3712500699116297490
 GameObject:
   m_ObjectHideFlags: 0
@@ -989,8 +1017,10 @@ GameObject:
   - component: {fileID: 9079445828410746614}
   - component: {fileID: 1122922589190495579}
   - component: {fileID: 5347618802116817918}
-  - component: {fileID: 1579554477946104161}
   - component: {fileID: 3459299641641084384}
+  - component: {fileID: 1579554477946104161}
+  - component: {fileID: 5754066211983529759}
+  - component: {fileID: 5754066211983529760}
   m_Layer: 0
   m_Name: chassisBOT
   m_TagString: Player
@@ -998,6 +1028,32 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!65 &5754066211983529759
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5754066211983529758}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.4, y: 2.79045, z: 0.1}
+  m_Center: {x: 0, y: -0.4183483, z: 0.106288}
+--- !u!65 &5754066211983529760
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5754066211983529758}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 2.79045, z: 5.843398}
+  m_Center: {x: 0, y: -0.4183483, z: 0.106288}
 --- !u!23 &6612914792753801390
 MeshRenderer:
   m_ObjectHideFlags: 0

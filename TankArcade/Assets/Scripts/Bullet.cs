@@ -10,6 +10,12 @@ public class Bullet : MonoBehaviour
     private float damage = 20;
 
 
+    void Start()
+    {
+        
+    }
+
+
     void Update()
     {
         time -= Time.deltaTime;
