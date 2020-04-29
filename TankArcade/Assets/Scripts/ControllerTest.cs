@@ -13,6 +13,7 @@ public class ControllerTest : MonoBehaviour
 	public Transform camPivot;
 	public GameObject shell;
 	public Transform shellPos;
+	public Material MatDestroyed;
 
 	private bool grounded = false;
 	private int horizontal;
@@ -36,7 +37,6 @@ public class ControllerTest : MonoBehaviour
 			reloadTime += Time.deltaTime;
 		if (Input.GetMouseButton(0) && reloadTime >= 0.5)
 		{
-			Debug.Log("shoot");
 			reloadTime = 0;
 			Instantiate(shell, shellPos.position, shellPos.rotation, null);
 		}
@@ -105,9 +105,28 @@ public class ControllerTest : MonoBehaviour
 	public void HitbyShell(float dmg)
 	{
 		health -= dmg;
-		if(health <= 0)
+		if (health <= 0)
 		{
 			Debug.Log("tank destroyed");
+			gameObject.tag = "Untagged";
+
+			// setting all mats to destroyed
+			// hull
+			Material[] mats = GetComponent<Renderer>().materials;
+			mats[0] = MatDestroyed;
+			mats[1] = MatDestroyed;
+			mats[2] = MatDestroyed;
+			GetComponent<Renderer>().materials = mats;
+			// turret
+			Material[] matsTurret = transform.GetChild(0).GetComponent<Renderer>().materials;
+			matsTurret[0] = MatDestroyed;
+			matsTurret[1] = MatDestroyed;
+			transform.GetChild(0).GetComponent<Renderer>().materials = matsTurret;
+			// gun
+			Material[] matsGun = transform.GetChild(0).GetChild(0).GetComponent<Renderer>().materials;
+			matsGun[0] = MatDestroyed;
+			transform.GetChild(0).GetChild(0).GetComponent<Renderer>().materials = matsGun;
+
 			Destroy(this);
 		}
 	}

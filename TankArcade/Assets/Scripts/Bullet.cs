@@ -5,23 +5,17 @@ public class Bullet : MonoBehaviour
 {
     public float speed = 10;
 
-    private float time = 0;
-    private int bounce = 0;
-    private Rigidbody rb;
-
-
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-        rb.AddForce(transform.forward * speed, ForceMode.VelocityChange);
-    }
+    private float time = 30;
+    private int bounces = 3;
+    private float damage = 20;
 
 
     void Update()
     {
-        time += Time.deltaTime;
-        if (time > 30)
+        time -= Time.deltaTime;
+        if (time < 0)
             Destroy(gameObject);
+        transform.position += transform.forward * Time.deltaTime * speed;
     }
 
 
@@ -30,7 +24,10 @@ public class Bullet : MonoBehaviour
         if (collision.transform.tag == "Player")
         {
             Debug.Log("hit player");
-            collision.transform.GetComponent<ControllerTest>().HitbyShell(20);
+            if(collision.transform.GetComponent<ControllerTest>())
+                collision.transform.GetComponent<ControllerTest>().HitbyShell(damage);
+            else
+                collision.transform.GetComponent<BotController>().HitbyShell(damage);
             Destroy(gameObject);
         }
         else if (collision.transform.tag == "Shell")
@@ -43,8 +40,8 @@ public class Bullet : MonoBehaviour
             newDir = Vector3.Reflect(curDir, contact.normal);
             transform.rotation = Quaternion.FromToRotation(Vector3.forward, newDir);
 
-            bounce += 1;
-            if (bounce == 4)
+            bounces -= 1;
+            if (bounces == 0)
                 Destroy(gameObject);
         }
     }

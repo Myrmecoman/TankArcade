@@ -31,7 +31,7 @@ SketchUpImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 0.0254
@@ -80,7 +80,7 @@ SketchUpImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 1
+    globalScale: 0.0254
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
@@ -96,8 +96,8 @@ SketchUpImporter:
   assetBundleVariant: 
   generateBackFace: 1
   mergeCoplanarFaces: 0
-  selectedNodes: 0000000001000000020000000300000004000000050000000600000007000000
+  selectedNodes: 0000000001000000
   assetHash:
     serializedVersion: 2
-    Hash: ba11c2e693d27262498ec4c81826f1c8
+    Hash: 380caa7ffed2ee7148209c46ab9d6b5b
   fileUnit: 0
