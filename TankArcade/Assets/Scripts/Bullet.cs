@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+
 public class Bullet : MonoBehaviour
 {
     public float speed = 10;
@@ -36,9 +37,12 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         else
         {
-            Vector3 orthogonalVector = collision.contacts[0].point - transform.position;
-            float collisionAngle = 180 - Vector3.Angle(orthogonalVector, rb.velocity);
-            Debug.Log("collision angle : " + collisionAngle);
+            ContactPoint contact = collision.contacts[0];
+            Vector3 newDir = Vector3.zero;
+            var curDir = transform.TransformDirection(Vector3.forward);
+            newDir = Vector3.Reflect(curDir, contact.normal);
+            transform.rotation = Quaternion.FromToRotation(Vector3.forward, newDir);
+
             bounce += 1;
             if (bounce == 4)
                 Destroy(gameObject);
