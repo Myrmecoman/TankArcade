@@ -4,17 +4,11 @@
 public class Bullet : MonoBehaviour
 {
     public float speed = 10;
+    public GameObject popSound;
 
     private float time = 30;
     private int bounces = 3;
     private float damage = 20;
-    private AudioSource popSound;
-
-
-    void Start()
-    {
-        popSound = GetComponent<AudioSource>();
-    }
 
 
     void Update()
@@ -42,7 +36,7 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         else
         {
-            popSound.Play();
+            Instantiate(popSound, transform.position, Quaternion.identity, null);
             ContactPoint contact = collision.contacts[0];
             Vector3 newDir = Vector3.zero;
             var curDir = transform.TransformDirection(Vector3.forward);

@@ -24,6 +24,7 @@ public class ControllerTest : MonoBehaviour
 	private Rigidbody rig;
 	private CameraShake shake;
 	private AudioSource explode;
+	private InputManager im;
 
 	//stats
 	private float health = 100;
@@ -35,6 +36,7 @@ public class ControllerTest : MonoBehaviour
 		rig = GetComponent<Rigidbody>();
 		shake = GetComponent<CameraShake>();
 		explode = GetComponent<AudioSource>();
+		im = InputManager.instance;
 	}
 
 
@@ -42,7 +44,7 @@ public class ControllerTest : MonoBehaviour
 	{
 		if (reloadTime < 0.5)
 			reloadTime += Time.deltaTime;
-		if (Input.GetMouseButton(0) && reloadTime >= 0.5)
+		if (im.GetKey(KeybindingActions.shoot) && reloadTime >= 0.5)
 		{
 			reloadTime = 0;
 			Instantiate(shell, shellPos.position, shellPos.rotation, null);
@@ -69,18 +71,18 @@ public class ControllerTest : MonoBehaviour
 		{
 			horizontal = 0;
 			vertical = 0;
-			if (Input.GetKey(KeyCode.Z))
+			if (im.GetKey(KeybindingActions.forward))
 				vertical = 1;
-			if (Input.GetKey(KeyCode.S))
+			if (im.GetKey(KeybindingActions.backward))
 				vertical = -1;
-			if (Input.GetKey(KeyCode.Q))
+			if (im.GetKey(KeybindingActions.left))
 			{
 				if (vertical != 0)
 					horizontal = -1 * vertical;
 				else
 					horizontal = -1;
 			}
-			if (Input.GetKey(KeyCode.D))
+			if (im.GetKey(KeybindingActions.right))
 			{
 				if (vertical != 0)
 					horizontal = 1 * vertical;
