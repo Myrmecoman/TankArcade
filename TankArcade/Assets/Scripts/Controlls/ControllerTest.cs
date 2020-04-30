@@ -36,6 +36,11 @@ public class ControllerTest : MonoBehaviour
 		rig = GetComponent<Rigidbody>();
 		shake = GetComponent<CameraShake>();
 		explode = GetComponent<AudioSource>();
+	}
+
+
+	void Start()
+	{
 		im = InputManager.instance;
 	}
 

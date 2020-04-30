@@ -4,5 +4,7 @@
     backward,
     left,
     right,
-    shoot
+    shoot,
+    camLeft,
+    camRight
 }

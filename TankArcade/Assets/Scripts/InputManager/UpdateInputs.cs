@@ -12,6 +12,8 @@ public class UpdateInputs : MonoBehaviour
     private string left;
     private string right;
     private string shoot;
+    private string camLeft;
+    private string camRight;
 
 
     private void Start()
@@ -31,11 +33,19 @@ public class UpdateInputs : MonoBehaviour
         shoot = PlayerPrefs.GetString("shoot");
         if (shoot == "")
             shoot = "Mouse0";
+        camLeft = PlayerPrefs.GetString("camLeft");
+        if (camLeft == "")
+            camLeft = "A";
+        camRight = PlayerPrefs.GetString("camRight");
+        if (camRight == "")
+            camRight = "E";
         binds.keybindingChecks[0].keycode = (KeyCode)System.Enum.Parse(typeof(KeyCode), forw);
         binds.keybindingChecks[1].keycode = (KeyCode)System.Enum.Parse(typeof(KeyCode), back);
         binds.keybindingChecks[2].keycode = (KeyCode)System.Enum.Parse(typeof(KeyCode), left);
         binds.keybindingChecks[3].keycode = (KeyCode)System.Enum.Parse(typeof(KeyCode), right);
-        binds.keybindingChecks[5].keycode = (KeyCode)System.Enum.Parse(typeof(KeyCode), shoot);
+        binds.keybindingChecks[4].keycode = (KeyCode)System.Enum.Parse(typeof(KeyCode), shoot);
+        binds.keybindingChecks[5].keycode = (KeyCode)System.Enum.Parse(typeof(KeyCode), camLeft);
+        binds.keybindingChecks[6].keycode = (KeyCode)System.Enum.Parse(typeof(KeyCode), camRight);
     }
 
 

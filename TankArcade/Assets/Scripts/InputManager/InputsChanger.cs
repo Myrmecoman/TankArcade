@@ -5,11 +5,14 @@ using UnityEngine.UI;
 public class InputsChanger : MonoBehaviour
 {
     public Keybindings binds;
+
     public Text forwardTxt;
     public Text backwardTxt;
     public Text leftTxt;
     public Text rightTxt;
     public Text shootTxt;
+    public Text camLeft;
+    public Text camRight;
 
     private bool selected = false;
     private string nameButton;
@@ -54,8 +57,20 @@ public class InputsChanger : MonoBehaviour
                 if (nameButton == "shoot")
                 {
                     shootTxt.text = vKey.ToString();
-                    binds.keybindingChecks[5].keycode = vKey;
+                    binds.keybindingChecks[4].keycode = vKey;
                     PlayerPrefs.SetString("shoot", vKey.ToString());
+                }
+                if (nameButton == "camLeft")
+                {
+                    rightTxt.text = vKey.ToString();
+                    binds.keybindingChecks[5].keycode = vKey;
+                    PlayerPrefs.SetString("camLeft", vKey.ToString());
+                }
+                if (nameButton == "camRight")
+                {
+                    shootTxt.text = vKey.ToString();
+                    binds.keybindingChecks[6].keycode = vKey;
+                    PlayerPrefs.SetString("camRight", vKey.ToString());
                 }
                 selected = true;
             }

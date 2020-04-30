@@ -23,3 +23,7 @@ MonoBehaviour:
     keycode: 100
   - keybindingAction: 4
     keycode: 323
+  - keybindingAction: 5
+    keycode: 97
+  - keybindingAction: 6
+    keycode: 101
