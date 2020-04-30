@@ -8,11 +8,12 @@ public class Bullet : MonoBehaviour
     private float time = 30;
     private int bounces = 3;
     private float damage = 20;
+    private AudioSource popSound;
 
 
     void Start()
     {
-        
+        popSound = GetComponent<AudioSource>();
     }
 
 
@@ -29,16 +30,19 @@ public class Bullet : MonoBehaviour
     {
         if (collision.transform.tag == "Player")
         {
-            if (collision.transform.GetComponent<ControllerTest>())
-                collision.transform.GetComponent<ControllerTest>().HitbyShell(damage);
-            else
-                collision.transform.GetComponent<BotController>().HitbyShell(damage);
+            collision.transform.GetComponent<ControllerTest>().HitbyShell(damage);
+            Destroy(gameObject);
+        }
+        else if(collision.transform.tag == "Bot")
+        {
+            collision.transform.GetComponent<BotController>().HitbyShell(damage);
             Destroy(gameObject);
         }
         else if (collision.transform.tag == "Shell")
             Destroy(gameObject);
         else
         {
+            popSound.Play();
             ContactPoint contact = collision.contacts[0];
             Vector3 newDir = Vector3.zero;
             var curDir = transform.TransformDirection(Vector3.forward);

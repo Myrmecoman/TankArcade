@@ -3,6 +3,7 @@
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(BoxCollider))]
+[RequireComponent(typeof(AudioSource))]
 
 public class ControllerTest : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class ControllerTest : MonoBehaviour
 	private int vertical;
 	private Rigidbody rig;
 	private CameraShake shake;
+	private AudioSource explode;
 
 	//stats
 	private float health = 100;
@@ -32,6 +34,7 @@ public class ControllerTest : MonoBehaviour
 	{
 		rig = GetComponent<Rigidbody>();
 		shake = GetComponent<CameraShake>();
+		explode = GetComponent<AudioSource>();
 	}
 
 
@@ -116,6 +119,7 @@ public class ControllerTest : MonoBehaviour
 			gameObject.tag = "Untagged";
 			Destroy(healthBar.gameObject);
 			shake.shakeDuration = 0.2f;
+			explode.Play();
 			Instantiate(Smoke, turret.position, transform.rotation, turret);
 
 			// setting all mats to destroyed

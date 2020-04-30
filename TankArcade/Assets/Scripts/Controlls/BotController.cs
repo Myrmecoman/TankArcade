@@ -3,6 +3,7 @@
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(BoxCollider))]
+[RequireComponent(typeof(AudioSource))]
 
 public class BotController : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class BotController : MonoBehaviour
 	private int vertical;
 	private Rigidbody rig;
 	private Transform playerPos;
+	private Rigidbody playerRig;
+	private AudioSource explode;
 
 	//stats
 	private float health = 100;
@@ -36,6 +39,8 @@ public class BotController : MonoBehaviour
 	void Start()
 	{
 		playerPos = GameObject.Find("turret").transform;
+		playerRig = GameObject.Find("chassis").GetComponent<Rigidbody>();
+		explode = GetComponent<AudioSource>();
 	}
 
 
@@ -45,15 +50,30 @@ public class BotController : MonoBehaviour
 			rng -= Time.deltaTime;
 		else
 		{
-			Instantiate(shell, shellPos.position, shellPos.rotation, null);
-			rng = Random.Range(1, 5);
+			RaycastHit hit;
+			if (Physics.Raycast(shellPos.position, shellPos.TransformDirection(Vector3.forward), out hit, 2000))
+			{
+				RaycastHit reflected;
+				Vector3 refl = Vector3.Reflect(hit.point - shellPos.position, hit.normal);
+				if (Physics.Raycast(hit.point, hit.transform.TransformDirection(Vector3.left) * hit.distance, out reflected, 2000))
+				{
+					//Debug.DrawRay(shellPos.position, shellPos.TransformDirection(Vector3.forward) * hit.distance, Color.yellow);
+					//Debug.DrawRay(hit.point, hit.transform.TransformDirection(Vector3.left) * hit.distance, Color.red);
+
+					if (!(reflected.collider.tag == "Bot") && !(hit.collider.tag == "Bot"))
+					{
+						Instantiate(shell, shellPos.position, shellPos.rotation, null);
+						rng = Random.Range(1, 5);
+					}
+				}
+			}
 		}
 	}
 
 
 	void FixedUpdate()
 	{
-		Quaternion targetRotation = Quaternion.LookRotation(playerPos.position - turret.position);
+		Quaternion targetRotation = Quaternion.LookRotation((playerPos.position + playerRig.velocity * 0.7f) - turret.position);
 		turret.rotation = Quaternion.RotateTowards(turret.rotation, targetRotation, 180 * Time.fixedDeltaTime);
 
 		// tank movements
@@ -112,6 +132,7 @@ public class BotController : MonoBehaviour
 			Debug.Log("tank destroyed");
 			gameObject.tag = "Untagged";
 			Destroy(healthBar.gameObject);
+			explode.Play();
 			Instantiate(Smoke, turret.position, transform.rotation, turret);
 
 			// setting all mats to destroyed
