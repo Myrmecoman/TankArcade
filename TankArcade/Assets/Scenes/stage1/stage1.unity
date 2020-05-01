@@ -435,7 +435,7 @@ PrefabInstance:
     - target: {fileID: 7275001265155457151, guid: 2da7f3a79abbfa140b0fe03761f60149,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 43.9
+      value: 4.1
       objectReference: {fileID: 0}
     - target: {fileID: 7275001265155457151, guid: 2da7f3a79abbfa140b0fe03761f60149,
         type: 3}
@@ -445,7 +445,7 @@ PrefabInstance:
     - target: {fileID: 7275001265155457151, guid: 2da7f3a79abbfa140b0fe03761f60149,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -48.1
+      value: -3.6
       objectReference: {fileID: 0}
     - target: {fileID: 7275001265155457151, guid: 2da7f3a79abbfa140b0fe03761f60149,
         type: 3}
@@ -2669,7 +2669,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1898976888}
   m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 22.8, y: 0, z: -47.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2924,7 +2924,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1995658090}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 22.8, y: 0, z: -47.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3016,7 +3016,7 @@ PrefabInstance:
     - target: {fileID: 5695713654029659288, guid: b23753b3d151e49458c6c4967b314c02,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 23.3
       objectReference: {fileID: 0}
     - target: {fileID: 5695713654029659288, guid: b23753b3d151e49458c6c4967b314c02,
         type: 3}
@@ -3026,7 +3026,7 @@ PrefabInstance:
     - target: {fileID: 5695713654029659288, guid: b23753b3d151e49458c6c4967b314c02,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -47.7
       objectReference: {fileID: 0}
     - target: {fileID: 5695713654029659288, guid: b23753b3d151e49458c6c4967b314c02,
         type: 3}

@@ -3,12 +3,11 @@
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = 10;
     public GameObject popSound;
-
-    private float time = 30;
-    private int bounces = 3;
-    private float damage = 20;
+    public float speed = 10;
+    public float time = 30;
+    public int bounces = 3;
+    public float damage = 20;
 
 
     void Update()
@@ -43,9 +42,10 @@ public class Bullet : MonoBehaviour
             newDir = Vector3.Reflect(curDir, contact.normal);
             transform.rotation = Quaternion.FromToRotation(Vector3.forward, newDir);
 
-            bounces -= 1;
             if (bounces == 0)
                 Destroy(gameObject);
+            else
+                bounces -= 1;
         }
     }
 }

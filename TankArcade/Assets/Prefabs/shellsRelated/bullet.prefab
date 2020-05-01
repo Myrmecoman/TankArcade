@@ -95,9 +95,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d1c04d9909afd142a4d50b97b1f5944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 40
   popSound: {fileID: 8542271729166731029, guid: 586de2f874f90684aa2f3504845d1641,
     type: 3}
+  speed: 40
+  time: 30
+  bounces: 2
+  damage: 20
 --- !u!54 &3745630071565117062
 Rigidbody:
   m_ObjectHideFlags: 0
