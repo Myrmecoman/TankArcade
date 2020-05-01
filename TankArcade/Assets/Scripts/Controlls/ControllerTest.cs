@@ -17,6 +17,8 @@ public class ControllerTest : MonoBehaviour
 	public Material MatDestroyed;
 	public HealthBar healthBar;
 	public GameObject Smoke;
+	[HideInInspector]
+	public bool destroyed = false;
 
 	private bool grounded = false;
 	private int horizontal;
@@ -123,6 +125,7 @@ public class ControllerTest : MonoBehaviour
 		if (health <= 0)
 		{
 			Debug.Log("tank destroyed");
+			destroyed = true;
 			gameObject.tag = "Untagged";
 			Destroy(healthBar.gameObject);
 			shake.shakeDuration = 0.2f;

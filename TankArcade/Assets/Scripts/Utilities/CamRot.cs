@@ -21,6 +21,6 @@ public class CamRot : MonoBehaviour
 			value = -1;
 		if (im.GetKey(KeybindingActions.camRight))
 			value = 1;
-		camPivot.eulerAngles = new Vector3(0, camPivot.eulerAngles.y + value * Time.deltaTime * 150, 0);
+		camPivot.eulerAngles = new Vector3(0, camPivot.eulerAngles.y + value * Time.deltaTime * 200, 0);
 	}
 }

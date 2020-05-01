@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 
 
-[RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(BoxCollider))]
 [RequireComponent(typeof(AudioSource))]
 
@@ -16,36 +16,39 @@ public class BotController : MonoBehaviour
 	public HealthBar healthBar;
 	public GameObject Smoke;
 
-	private bool grounded = false;
-	private int horizontal;
-	private int vertical;
-	private Rigidbody rig;
 	private Transform playerPos;
+	private ControllerTest player;
 	private Rigidbody playerRig;
 	private AudioSource explode;
+	private NavMeshAgent agent;
 
 	//stats
 	private float health = 100;
 	private float rng;
 
 
-	void Awake()
-	{
-		rig = GetComponent<Rigidbody>();
-		float rng = Random.Range(1, 5);
-	}
-
-
 	void Start()
 	{
 		playerPos = GameObject.Find("turret").transform;
-		playerRig = GameObject.Find("chassis").GetComponent<Rigidbody>();
+		player = GameObject.Find("chassis").GetComponent<ControllerTest>();
+		playerRig = player.GetComponent<Rigidbody>();
 		explode = GetComponent<AudioSource>();
+		agent = GetComponent<NavMeshAgent>();
+		float rng = Random.Range(1, 5);
 	}
 
 
 	void Update()
 	{
+		if (player.destroyed)
+		{
+			agent.updatePosition = false;
+			agent.updateRotation = false;
+			return;
+		}
+
+		agent.destination = playerPos.position;
+			
 		if (rng >= 0)
 			rng -= Time.deltaTime;
 		else
@@ -75,51 +78,6 @@ public class BotController : MonoBehaviour
 	{
 		Quaternion targetRotation = Quaternion.LookRotation((playerPos.position + playerRig.velocity * 0.7f) - turret.position);
 		turret.rotation = Quaternion.RotateTowards(turret.rotation, targetRotation, 180 * Time.fixedDeltaTime);
-
-		// tank movements
-		if (grounded)
-		{
-			horizontal = 0;
-			vertical = 0;
-			/*
-			if (Input.GetKey(KeyCode.Z))
-				vertical = 1;
-			if (Input.GetKey(KeyCode.S))
-				vertical = -1;
-			if (Input.GetKey(KeyCode.Q))
-			{
-				if (vertical != 0)
-					horizontal = -1 * vertical;
-				else
-					horizontal = -1;
-			}
-			if (Input.GetKey(KeyCode.D))
-			{
-				if (vertical != 0)
-					horizontal = 1 * vertical;
-				else
-					horizontal = 1;
-			}
-			*/
-			transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + horizontal * Time.fixedDeltaTime * 150, 0);
-			Vector3 targetVelocity = new Vector3(0, 0, vertical);
-			targetVelocity = transform.TransformDirection(targetVelocity);
-			targetVelocity *= speed;
-			Vector3 velocity = rig.velocity;
-			Vector3 velocityChange = (targetVelocity - velocity);
-			velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
-			velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
-			velocityChange.y = 0;
-			rig.AddForce(velocityChange, ForceMode.VelocityChange);
-		}
-		
-		grounded = false;
-	}
-
-
-	void OnCollisionStay()
-	{
-		grounded = true;
 	}
 
 
@@ -129,6 +87,8 @@ public class BotController : MonoBehaviour
 		healthBar.SetHealth(health);
 		if (health <= 0)
 		{
+			agent.updatePosition = false;
+			agent.updateRotation = false;
 			Debug.Log("tank destroyed");
 			gameObject.tag = "Untagged";
 			Destroy(healthBar.gameObject);
