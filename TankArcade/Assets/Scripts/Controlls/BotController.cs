@@ -40,6 +40,13 @@ public class BotController : MonoBehaviour
 
 	void Update()
 	{
+		if (turret.localEulerAngles.y >= 235 && turret.localEulerAngles.y <= 315)
+			shellPos.localPosition = new Vector3(0, 0.5f, 1.7f + Mathf.Abs(turret.localEulerAngles.y - 275) * 0.02f);
+		else if (turret.localEulerAngles.y >= 45 && turret.localEulerAngles.y <= 125)
+			shellPos.localPosition = new Vector3(0, 0.5f, 1.7f + Mathf.Abs(turret.localEulerAngles.y - 85) * 0.02f);
+		else
+			shellPos.localPosition = new Vector3(0, 0.5f, 2.5f);
+
 		if (player.destroyed)
 		{
 			agent.updatePosition = false;
@@ -87,6 +94,8 @@ public class BotController : MonoBehaviour
 		healthBar.SetHealth(health);
 		if (health <= 0)
 		{
+			Rigidbody addRig = gameObject.AddComponent<Rigidbody>();
+			addRig.mass = 1000;
 			agent.updatePosition = false;
 			agent.updateRotation = false;
 			Debug.Log("tank destroyed");

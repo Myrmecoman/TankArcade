@@ -49,6 +49,13 @@ public class ControllerTest : MonoBehaviour
 
 	void Update()
 	{
+		if (turret.localEulerAngles.y >= 235 && turret.localEulerAngles.y <= 315)
+			shellPos.localPosition = new Vector3(0, 0.5f, 1.7f + Mathf.Abs(turret.localEulerAngles.y - 275) * 0.02f);
+		else if (turret.localEulerAngles.y >= 45 && turret.localEulerAngles.y <= 125)
+			shellPos.localPosition = new Vector3(0, 0.5f, 1.7f + Mathf.Abs(turret.localEulerAngles.y - 85) * 0.02f);
+		else
+			shellPos.localPosition = new Vector3(0, 0.5f, 2.5f);
+
 		if (reloadTime < 0.5)
 			reloadTime += Time.deltaTime;
 		if (im.GetKey(KeybindingActions.shoot) && reloadTime >= 0.5)

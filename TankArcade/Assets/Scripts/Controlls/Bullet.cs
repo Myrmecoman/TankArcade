@@ -27,7 +27,7 @@ public class Bullet : MonoBehaviour
             collision.transform.GetComponent<ControllerTest>().HitbyShell(damage);
             Destroy(gameObject);
         }
-        else if(collision.transform.tag == "Bot")
+        else if (collision.transform.tag == "Bot")
         {
             collision.transform.GetComponent<BotController>().HitbyShell(damage);
             Destroy(gameObject);
