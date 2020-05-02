@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class MenuMethods : MonoBehaviour
+public class Settings : MonoBehaviour
 {
     public Dropdown ResolutionDropdown;
     //public Dropdown QualityDropdown;
@@ -16,12 +16,6 @@ public class MenuMethods : MonoBehaviour
         //QualitySettings.SetQualityLevel(3);
         //QualityDropdown.value = 3;
         //QualityDropdown.RefreshShownValue();
-    }
-
-
-    public void Quit()
-    {
-        Application.Quit();
     }
 
 
