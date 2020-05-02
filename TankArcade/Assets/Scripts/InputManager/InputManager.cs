@@ -12,7 +12,7 @@ public class InputManager : MonoBehaviour
         if (instance == null)
             instance = this;
         else if (instance != null)
-            Destroy(this);
+            Destroy(gameObject);
         DontDestroyOnLoad(this);
     }
 

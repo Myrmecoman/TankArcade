@@ -21,6 +21,7 @@ public class BotController : MonoBehaviour
 	private Rigidbody playerRig;
 	private AudioSource explode;
 	private NavMeshAgent agent;
+	private LevelButtons levelBoss;
 
 	//stats
 	private float health = 100;
@@ -31,6 +32,7 @@ public class BotController : MonoBehaviour
 	{
 		playerPos = GameObject.Find("turret").transform;
 		player = GameObject.Find("chassis").GetComponent<ControllerTest>();
+		levelBoss = FindObjectOfType<LevelButtons>();
 		playerRig = player.GetComponent<Rigidbody>();
 		explode = GetComponent<AudioSource>();
 		agent = GetComponent<NavMeshAgent>();
@@ -94,6 +96,7 @@ public class BotController : MonoBehaviour
 		healthBar.SetHealth(health);
 		if (health <= 0)
 		{
+			levelBoss.DestroySignal();
 			Rigidbody addRig = gameObject.AddComponent<Rigidbody>();
 			addRig.mass = 1000;
 			agent.updatePosition = false;
