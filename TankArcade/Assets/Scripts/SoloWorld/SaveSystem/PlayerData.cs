@@ -8,6 +8,6 @@ public class PlayerData
     public PlayerData(CharacterManager player)
     {
         Currentindex = player.CurrentIndex;
-        maxIndex = player.GetMaxIndex();
+        maxIndex = player.maxIndex;
     }
 }

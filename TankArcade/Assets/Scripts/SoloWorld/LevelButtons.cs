@@ -50,5 +50,6 @@ public class LevelButtons : MonoBehaviour
     public void Reload()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Destroy(gameObject);
     }
 }

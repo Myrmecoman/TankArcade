@@ -53,21 +53,18 @@ public class CharacterManager : MonoBehaviour
             transform.position = new Vector3(SlotList[CurrentIndex].position.x, SlotList[CurrentIndex].position.y + 2.3f, SlotList[CurrentIndex].position.z);
         }
 
-        if ((im.GetKey(KeybindingActions.right) || Input.GetKeyDown(KeyCode.RightArrow)) && CurrentIndex < maxIndex)
+        if ((im.GetKey(KeybindingActions.right) || Input.GetKeyDown(KeyCode.RightArrow)) && CurrentIndex < maxIndex && CurrentIndex < SlotList.Length - 1)
         {
             CurrentIndex++;
             transform.position = new Vector3(SlotList[CurrentIndex].position.x, SlotList[CurrentIndex].position.y + 2.3f, SlotList[CurrentIndex].position.z);
         }
+
+        if (Input.GetKeyDown(KeyCode.X))
+            Debug.Log(CurrentIndex);
     }
 
 
-    public int GetMaxIndex()
-    {
-        return 0;
-    }
-
-
-    public void SetSlots(int index)
+    public void SetSlots()
     {
         
     }
