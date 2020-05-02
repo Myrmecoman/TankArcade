@@ -102,7 +102,7 @@ public class BotController : MonoBehaviour
 			gameObject.tag = "Untagged";
 			Destroy(healthBar.gameObject);
 			explode.Play();
-			Instantiate(Smoke, turret.position, transform.rotation, turret);
+			Instantiate(Smoke, transform.position, Quaternion.identity, transform);
 
 			// setting all mats to destroyed
 			// hull

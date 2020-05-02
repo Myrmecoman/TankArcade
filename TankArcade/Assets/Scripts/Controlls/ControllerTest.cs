@@ -137,7 +137,7 @@ public class ControllerTest : MonoBehaviour
 			Destroy(healthBar.gameObject);
 			shake.shakeDuration = 0.2f;
 			explode.Play();
-			Instantiate(Smoke, turret.position, transform.rotation, turret);
+			Instantiate(Smoke, transform.position, Quaternion.identity, transform);
 
 			// setting all mats to destroyed
 			// hull
