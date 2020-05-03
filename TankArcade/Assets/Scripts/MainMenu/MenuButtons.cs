@@ -8,6 +8,14 @@ public class MenuButtons : MonoBehaviour
     public GameObject[] submenuObjs;
 
 
+    void Start()
+    {
+        foreach (GameObject g in submenuObjs)
+            g.SetActive(false);
+        subMenu.SetActive(false);
+    }
+
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))

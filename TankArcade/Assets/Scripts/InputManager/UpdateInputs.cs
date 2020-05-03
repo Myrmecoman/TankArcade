@@ -1,12 +1,10 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 
+[RequireComponent(typeof(InputManager))]
 public class UpdateInputs : MonoBehaviour
 {
-    public Keybindings binds;
-    public Text[] texts;
-
+    private Keybindings binds;
     private string forw;
     private string back;
     private string left;
@@ -18,6 +16,8 @@ public class UpdateInputs : MonoBehaviour
 
     private void Start()
     {
+        binds = gameObject.GetComponent<InputManager>().keybindings;
+
         forw = PlayerPrefs.GetString("forward");
         if (forw == "")
             forw = "Z";
@@ -39,6 +39,7 @@ public class UpdateInputs : MonoBehaviour
         camRight = PlayerPrefs.GetString("camRight");
         if (camRight == "")
             camRight = "E";
+
         binds.keybindingChecks[0].keycode = (KeyCode)System.Enum.Parse(typeof(KeyCode), forw);
         binds.keybindingChecks[1].keycode = (KeyCode)System.Enum.Parse(typeof(KeyCode), back);
         binds.keybindingChecks[2].keycode = (KeyCode)System.Enum.Parse(typeof(KeyCode), left);
@@ -46,12 +47,5 @@ public class UpdateInputs : MonoBehaviour
         binds.keybindingChecks[4].keycode = (KeyCode)System.Enum.Parse(typeof(KeyCode), shoot);
         binds.keybindingChecks[5].keycode = (KeyCode)System.Enum.Parse(typeof(KeyCode), camLeft);
         binds.keybindingChecks[6].keycode = (KeyCode)System.Enum.Parse(typeof(KeyCode), camRight);
-    }
-
-
-    public void UpdateTexts()
-    {
-        for (int i = 0; i < texts.Length; i++)
-            texts[i].text = binds.keybindingChecks[i].keycode.ToString();
     }
 }
