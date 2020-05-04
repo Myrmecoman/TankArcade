@@ -1742,18 +1742,22 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 30
+    m_FontSize: 35
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 3
+    m_MinSize: 0
     m_MaxSize: 40
-    m_Alignment: 4
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Nothing yet
+  m_Text: Due to technical limitations and even though this game includes multiplayer,
+    there is no account system. Everything is saved on your pc. I chose not to forbid
+    save files share since you may want to keep those if you change your pc. The
+    file name is player.chancla. Be aware that if you delete the game the save file
+    will be deleted too.
 --- !u!222 &633530853
 CanvasRenderer:
   m_ObjectHideFlags: 0

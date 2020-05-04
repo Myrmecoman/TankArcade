@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-
+using TMPro;
+using System;
 
 public class LevelButtons : MonoBehaviour
 {
     public GameObject wintxt;
+    public TextMeshProUGUI time;
     [HideInInspector] public bool win = false;
+    [HideInInspector] public double completeTime;
 
     private float winTimeAfter = 0;
     private float destroyNb = 0;
@@ -15,6 +17,7 @@ public class LevelButtons : MonoBehaviour
 
     void Start()
     {
+        completeTime = 0;
         DontDestroyOnLoad(this);
         bots = FindObjectsOfType(typeof(BotController)) as BotController[];
         destroyNb = bots.Length;
@@ -23,6 +26,11 @@ public class LevelButtons : MonoBehaviour
 
     void Update()
     {
+        if (!win)
+        {
+            completeTime += Time.deltaTime;
+            time.text = String.Format("{0:0.00}", completeTime);
+        }
         if (win)
             winTimeAfter += Time.deltaTime;
         if(winTimeAfter > 5)
