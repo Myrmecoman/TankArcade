@@ -9,13 +9,21 @@ public class Bullet : MonoBehaviour
     public int bounces = 3;
     public float damage = 20;
 
+    private Rigidbody rb;
+
+
+    void Start()
+    {
+        rb = gameObject.GetComponent<Rigidbody>();
+        rb.velocity = transform.forward * speed;
+    }
+
 
     void Update()
     {
         time -= Time.deltaTime;
         if (time < 0)
             Destroy(gameObject);
-        transform.position += transform.forward * Time.deltaTime * speed;
     }
 
 
@@ -41,6 +49,7 @@ public class Bullet : MonoBehaviour
             var curDir = transform.TransformDirection(Vector3.forward);
             newDir = Vector3.Reflect(curDir, contact.normal);
             transform.rotation = Quaternion.FromToRotation(Vector3.forward, newDir);
+            rb.velocity = transform.forward * speed;
 
             if (bounces == 0)
                 Destroy(gameObject);
