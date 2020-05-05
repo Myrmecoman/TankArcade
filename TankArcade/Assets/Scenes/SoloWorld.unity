@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -1662,6 +1662,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startLevelIndex: 2
+  disabled: {fileID: 2100000, guid: 909feadad3dc6e2469a83b3ed92a4d4c, type: 2}
   timeText: {fileID: 518314473}
   SlotList:
   - {fileID: 144538300}

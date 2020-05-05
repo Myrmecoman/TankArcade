@@ -7,6 +7,7 @@ using System;
 public class CharacterManager : MonoBehaviour
 {
     public int startLevelIndex;
+    public Material disabled;
     public Text timeText;
     public Transform[] SlotList;
     [HideInInspector] public double[] times;
@@ -51,6 +52,7 @@ public class CharacterManager : MonoBehaviour
             timeText.text = "Best time : " + String.Format("{0:0.00}", times[CurrentIndex]);
         else
             timeText.text = "No time yet";
+        SavePlayer();
         SetSlots();
     }
 
@@ -93,7 +95,7 @@ public class CharacterManager : MonoBehaviour
         for(int i = 0; i < SlotList.Length; i++)
         {
             if (i > maxIndex)
-                SlotList[i].position = new Vector3(SlotList[i].position.x, SlotList[i].position.y - 10, SlotList[i].position.z);
+                SlotList[i].GetComponent<Renderer>().material = disabled;
         }
     }
 
