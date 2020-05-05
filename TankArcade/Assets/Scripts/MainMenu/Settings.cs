@@ -1,21 +1,32 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering;
 
 public class Settings : MonoBehaviour
 {
     public Dropdown ResolutionDropdown;
-    //public Dropdown QualityDropdown;
+    public Dropdown QualityDropdown;
+    public Toggle fullScreenToggle;
+    public RenderPipelineAsset LowQ;
+    public RenderPipelineAsset MediumQ;
+    public RenderPipelineAsset HighQ;
 
 
     void Start()
     {
-        Screen.SetResolution(Screen.width, Screen.height, Screen.fullScreen);
-        ResolutionDropdown.value = 6;
+        int res = PlayerPrefs.GetInt("screenRes", 6);
+        int qual = PlayerPrefs.GetInt("gameQuality", 2);
+
+        ResolutionDropdown.value = res;
         ResolutionDropdown.RefreshShownValue();
 
-        //QualitySettings.SetQualityLevel(3);
-        //QualityDropdown.value = 3;
-        //QualityDropdown.RefreshShownValue();
+        QualityDropdown.value = qual;
+        QualityDropdown.RefreshShownValue();
+
+        if (Screen.fullScreen)
+            fullScreenToggle.isOn = true;
+        else
+            fullScreenToggle.isOn = false;
     }
 
 
@@ -60,17 +71,27 @@ public class Settings : MonoBehaviour
             b = 1080;
         }
         Screen.SetResolution(a, b, Screen.fullScreen);
+        PlayerPrefs.SetInt("screenRes", ResolutionDropdown.value);
     }
 
 
     public void SetQuality()
     {
-        //QualitySettings.SetQualityLevel(QualityDropdown.value);
+        if (QualityDropdown.value == 0)
+            GraphicsSettings.renderPipelineAsset = LowQ;
+        if (QualityDropdown.value == 1)
+            GraphicsSettings.renderPipelineAsset = MediumQ;
+        if (QualityDropdown.value == 2)
+            GraphicsSettings.renderPipelineAsset = HighQ;
+        PlayerPrefs.SetInt("gameQuality", QualityDropdown.value);
     }
 
 
     public void SetFullscreen()
     {
-        Screen.fullScreen = !Screen.fullScreen;
+        if(fullScreenToggle.isOn && !Screen.fullScreen)
+            Screen.fullScreen = true;
+        if (!fullScreenToggle.isOn && Screen.fullScreen)
+            Screen.fullScreen = false;
     }
 }
