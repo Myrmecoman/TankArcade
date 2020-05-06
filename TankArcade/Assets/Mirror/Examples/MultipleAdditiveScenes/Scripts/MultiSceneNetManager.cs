@@ -92,7 +92,7 @@ namespace Mirror.Examples.MultipleAdditiveScenes
 
         IEnumerator UnloadSubScenes()
         {
-            for (int index = 0; index < subScenes.Count; index++)
+            for (int index = 0; index < subScenes.Count - 1; index++)
                 yield return SceneManager.UnloadSceneAsync(subScenes[index]);
 
             subScenes.Clear();

@@ -509,7 +509,7 @@ MonoBehaviour:
   startOnHeadless: 1
   showDebugMessages: 0
   serverTickRate: 30
-  offlineScene: Assets/Scenes/MultiplayerScenes/LobbyRoom.unity
+  offlineScene: 
   onlineScene: 
   transport: {fileID: 4288808005156636937}
   networkAddress: localhost
