@@ -103,7 +103,7 @@ public class ControllerTest : MonoBehaviour
 				else
 					horizontal = 1;
 			}
-			transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + horizontal * Time.fixedDeltaTime * 150, 0);
+			transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + horizontal * Time.fixedDeltaTime * 150, transform.eulerAngles.z);
 			Vector3 targetVelocity = new Vector3(0, 0, vertical);
 			targetVelocity = transform.TransformDirection(targetVelocity);
 			targetVelocity *= speed;
@@ -131,7 +131,7 @@ public class ControllerTest : MonoBehaviour
 		healthBar.SetHealth(health);
 		if (health <= 0)
 		{
-			Debug.Log("tank destroyed");
+			Debug.Log("player tank destroyed");
 			destroyed = true;
 			gameObject.tag = "Untagged";
 			Destroy(healthBar.gameObject);
