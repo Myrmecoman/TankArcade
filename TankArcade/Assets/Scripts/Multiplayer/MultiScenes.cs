@@ -10,7 +10,6 @@ namespace Mirror.Examples.MultipleAdditiveScenes
     {
         [Header("MultiScene Setup")]
         public int instances = 3;
-        public int PlayersPerRoom = 2;
 
         [Scene]
         public string gameScene;
