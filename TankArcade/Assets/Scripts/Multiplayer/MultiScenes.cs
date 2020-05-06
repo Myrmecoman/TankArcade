@@ -79,7 +79,8 @@ namespace Mirror.Examples.MultipleAdditiveScenes
 
         public override void OnStopClient()
         {
-            StartCoroutine(UnloadClientSubScenes());
+            if (mode == NetworkManagerMode.ClientOnly)
+                StartCoroutine(UnloadClientSubScenes());
         }
 
         IEnumerator UnloadClientSubScenes()
@@ -93,7 +94,7 @@ namespace Mirror.Examples.MultipleAdditiveScenes
 
         IEnumerator UnloadSubScenes()
         {
-            for (int index = 0; index < subScenes.Count - 1; index++)
+            for (int index = 0; index < subScenes.Count; index++)
                 yield return SceneManager.UnloadSceneAsync(subScenes[index]);
 
             subScenes.Clear();
