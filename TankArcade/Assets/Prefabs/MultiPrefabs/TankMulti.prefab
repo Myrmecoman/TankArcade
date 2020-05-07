@@ -85,7 +85,8 @@ GameObject:
   - component: {fileID: 1593292610724767662}
   - component: {fileID: 1593292610724767657}
   - component: {fileID: 1593292610724767656}
-  - component: {fileID: 1593292610724767660}
+  - component: {fileID: 5009645338622185216}
+  - component: {fileID: 5681265930368915554}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -173,7 +174,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &1593292610724767660
+--- !u!114 &5009645338622185216
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -182,11 +183,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 1593292610724767659}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ac7bab0571593540a9c84627c671f75, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneId: 0
+  serverOnly: 0
+  m_AssetId: 
+  hasSpawned: 0
+--- !u!114 &5681265930368915554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1593292610724767659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4039bd2086cb4704d99556a86ed1069a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
   cam: {fileID: 1593292611421108860}
-  isBot: 0
 --- !u!1 &1593292610905342646
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,7 +381,7 @@ GameObject:
   - component: {fileID: 1593292611421108861}
   m_Layer: 0
   m_Name: MainCam
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -410,7 +428,7 @@ Camera:
   field of view: 80
   orthographic: 0
   orthographic size: 30
-  m_Depth: -1
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295

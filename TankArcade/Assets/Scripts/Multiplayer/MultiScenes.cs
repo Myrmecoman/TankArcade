@@ -10,11 +10,23 @@ namespace Mirror.Examples.MultipleAdditiveScenes
     {
         [Header("MultiScene Setup")]
         public int instances = 3;
+        public int PlayersPerRoom = 2;
 
         [Scene]
         public string gameScene;
 
         readonly List<Scene> subScenes = new List<Scene>();
+
+        private int[] ScenesPlayers;
+
+
+        private new void Start()
+        {
+            ScenesPlayers = new int[instances];
+            for(int i = 0; i < ScenesPlayers.Length; i++)
+                ScenesPlayers[i] = 0;
+        }
+
 
         #region Server System Callbacks
 
@@ -37,7 +49,25 @@ namespace Mirror.Examples.MultipleAdditiveScenes
             base.OnServerAddPlayer(conn);
 
             if (subScenes.Count > 0)
-                SceneManager.MoveGameObjectToScene(conn.identity.gameObject, subScenes[conn.connectionId % subScenes.Count]);
+            {
+                int connectToScene = 0;
+                while (connectToScene < instances)
+                {
+                    if (ScenesPlayers[connectToScene] >= PlayersPerRoom)
+                        connectToScene++;
+                    else
+                        break;
+                }
+
+                if (connectToScene == instances)
+                    Debug.LogWarning("All rooms are full !");
+                else
+                {
+                    Debug.Log("New player ID : " + conn.connectionId + " was added to room n°" + connectToScene);
+                    ScenesPlayers[connectToScene]++;
+                    SceneManager.MoveGameObjectToScene(conn.identity.gameObject, subScenes[connectToScene]);
+                }
+            }
         }
 
         #endregion

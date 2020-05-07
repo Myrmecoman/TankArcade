@@ -113,7 +113,7 @@ public class ControllerTest : MonoBehaviour
 				else
 					horizontal = 1;
 			}
-			transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + horizontal * Time.fixedDeltaTime * 150, transform.eulerAngles.z);
+			transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + horizontal * Time.fixedDeltaTime * 150, 0);
 			Vector3 targetVelocity = new Vector3(0, 0, vertical);
 			targetVelocity = transform.TransformDirection(targetVelocity);
 			targetVelocity *= speed;

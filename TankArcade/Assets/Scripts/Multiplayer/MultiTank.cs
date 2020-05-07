@@ -5,6 +5,7 @@ using Mirror;
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(BoxCollider))]
 [RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(NetworkTransform))]
 
 public class MultiTank : NetworkBehaviour
 {
@@ -46,8 +47,11 @@ public class MultiTank : NetworkBehaviour
 
 	void Start()
 	{
-		if (!hasAuthority)
+		if (!isLocalPlayer)
+		{
+			cam.gameObject.SetActive(false);
 			return;
+		}
 
 		PivotValue = turret.eulerAngles.y;
 		im = InputManager.instance;
@@ -56,7 +60,7 @@ public class MultiTank : NetworkBehaviour
 
 	void Update()
 	{
-		if (!hasAuthority)
+		if (!isLocalPlayer)
 			return;
 
 		RotValue = 0;
@@ -86,7 +90,7 @@ public class MultiTank : NetworkBehaviour
 
 	void FixedUpdate()
 	{
-		if (!hasAuthority)
+		if (!isLocalPlayer)
 			return;
 
 		// turret look at mouse
@@ -123,7 +127,7 @@ public class MultiTank : NetworkBehaviour
 				else
 					horizontal = 1;
 			}
-			transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y + horizontal * Time.fixedDeltaTime * 150, transform.eulerAngles.z);
+			transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + horizontal * Time.fixedDeltaTime * 150, 0);
 			Vector3 targetVelocity = new Vector3(0, 0, vertical);
 			targetVelocity = transform.TransformDirection(targetVelocity);
 			targetVelocity *= speed;
@@ -147,7 +151,7 @@ public class MultiTank : NetworkBehaviour
 
 	public void HitbyShell(float dmg)
 	{
-		if (!hasAuthority)
+		if (!isLocalPlayer)
 			return;
 
 		health -= dmg;
