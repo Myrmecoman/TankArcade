@@ -31,7 +31,7 @@ public class BotController : MonoBehaviour
 	void Start()
 	{
 		playerPos = GameObject.Find("turret").transform;
-		player = GameObject.Find("chassis").GetComponent<ControllerTest>();
+		player = GameObject.Find("TankSolo").GetComponent<ControllerTest>();
 		levelBoss = FindObjectOfType<LevelButtons>();
 		playerRig = player.GetComponent<Rigidbody>();
 		explode = GetComponent<AudioSource>();

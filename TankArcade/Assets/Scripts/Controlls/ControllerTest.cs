@@ -26,6 +26,8 @@ public class ControllerTest : MonoBehaviour
 	private Rigidbody rig;
 	private CameraShake shake;
 	private AudioSource explode;
+	private int RotValue;
+	private float PivotValue;
 	private InputManager im;
 
 	//stats
@@ -43,12 +45,21 @@ public class ControllerTest : MonoBehaviour
 
 	void Start()
 	{
+		PivotValue = turret.eulerAngles.y;
 		im = InputManager.instance;
 	}
 
 
 	void Update()
 	{
+		RotValue = 0;
+		if (im.GetKey(KeybindingActions.camLeft))
+			RotValue = -1;
+		if (im.GetKey(KeybindingActions.camRight))
+			RotValue = 1;
+		PivotValue = PivotValue + RotValue * Time.deltaTime * 200;
+		camPivot.eulerAngles = new Vector3(0, PivotValue, 0);
+
 		if (turret.localEulerAngles.y >= 235 && turret.localEulerAngles.y <= 315)
 			shellPos.localPosition = new Vector3(0, 0.5f, 1.7f + Mathf.Abs(turret.localEulerAngles.y - 275) * 0.02f);
 		else if (turret.localEulerAngles.y >= 45 && turret.localEulerAngles.y <= 125)
@@ -63,7 +74,6 @@ public class ControllerTest : MonoBehaviour
 			reloadTime = 0;
 			Instantiate(shell, shellPos.position, shellPos.rotation, null);
 		}
-		camPivot.position = transform.position;
 	}
 
 
@@ -147,14 +157,14 @@ public class ControllerTest : MonoBehaviour
 			mats[2] = MatDestroyed;
 			GetComponent<Renderer>().materials = mats;
 			// turret
-			Material[] matsTurret = transform.GetChild(0).GetComponent<Renderer>().materials;
+			Material[] matsTurret = transform.GetChild(1).GetComponent<Renderer>().materials;
 			matsTurret[0] = MatDestroyed;
 			matsTurret[1] = MatDestroyed;
-			transform.GetChild(0).GetComponent<Renderer>().materials = matsTurret;
+			transform.GetChild(1).GetComponent<Renderer>().materials = matsTurret;
 			// gun
-			Material[] matsGun = transform.GetChild(0).GetChild(0).GetComponent<Renderer>().materials;
+			Material[] matsGun = transform.GetChild(1).GetChild(0).GetComponent<Renderer>().materials;
 			matsGun[0] = MatDestroyed;
-			transform.GetChild(0).GetChild(0).GetComponent<Renderer>().materials = matsGun;
+			transform.GetChild(1).GetChild(0).GetComponent<Renderer>().materials = matsGun;
 
 			Destroy(this);
 		}

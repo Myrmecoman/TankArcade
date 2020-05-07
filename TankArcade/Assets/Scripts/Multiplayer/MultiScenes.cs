@@ -36,11 +36,6 @@ namespace Mirror.Examples.MultipleAdditiveScenes
 
             base.OnServerAddPlayer(conn);
 
-            PlayerScore playerScore = conn.identity.GetComponent<PlayerScore>();
-            playerScore.playerNumber = conn.connectionId;
-            playerScore.scoreIndex = conn.connectionId / subScenes.Count;
-            playerScore.matchIndex = conn.connectionId % subScenes.Count;
-
             if (subScenes.Count > 0)
                 SceneManager.MoveGameObjectToScene(conn.identity.gameObject, subScenes[conn.connectionId % subScenes.Count]);
         }

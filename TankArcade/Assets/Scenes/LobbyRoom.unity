@@ -265,7 +265,7 @@ MonoBehaviour:
   disconnectInactiveConnections: 0
   disconnectInactiveTimeout: 60
   authenticator: {fileID: 0}
-  playerPrefab: {fileID: 1298003958550429308, guid: 4d712a4818f8d5641a7000fa5f5b851a,
+  playerPrefab: {fileID: 2659313278888001833, guid: 3fa1072d21a4dc341921c7f098f5c41f,
     type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
@@ -607,7 +607,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4288808005224345805}
   - component: {fileID: 4288808005224345842}
-  - component: {fileID: 4288808005224345843}
   - component: {fileID: 8115525125424035003}
   m_Layer: 0
   m_Name: Main Camera
@@ -659,14 +658,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &4288808005224345843
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4288808005224345840}
-  m_Enabled: 1
 --- !u!1 &4288808005372672812
 GameObject:
   m_ObjectHideFlags: 0
