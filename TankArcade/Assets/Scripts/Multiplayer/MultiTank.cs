@@ -50,6 +50,7 @@ public class MultiTank : NetworkBehaviour
 		if (!isLocalPlayer)
 		{
 			cam.gameObject.SetActive(false);
+			rig.isKinematic = true;
 			return;
 		}
 
@@ -145,6 +146,9 @@ public class MultiTank : NetworkBehaviour
 
 	void OnCollisionStay()
 	{
+		if (!isLocalPlayer)
+			return;
+
 		grounded = true;
 	}
 
