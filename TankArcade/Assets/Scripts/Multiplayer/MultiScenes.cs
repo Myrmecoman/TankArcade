@@ -92,6 +92,13 @@ namespace Mirror.Examples.MultipleAdditiveScenes
             }
         }
 
+
+        void FixedUpdate()
+        {
+            for (int i = 0; i < subScenes.Count; i++)
+                subScenes[i].GetPhysicsScene().Simulate(Time.fixedDeltaTime * 1 /* timescale */);
+        }
+
         /// <summary>
         /// This is called when a server is stopped - including when a host is stopped.
         /// </summary>

@@ -11,12 +11,6 @@ public class CameraShake : MonoBehaviour
 	private Vector3 originalPos;
 
 
-	void Awake()
-	{
-		if (camTransform == null)
-			camTransform = GetComponent(typeof(Transform)) as Transform;
-	}
-
 	void OnEnable()
 	{
 		originalPos = camTransform.localPosition;

@@ -85,8 +85,6 @@ GameObject:
   - component: {fileID: 1593292610724767662}
   - component: {fileID: 1593292610724767657}
   - component: {fileID: 1593292610724767656}
-  - component: {fileID: 5009645338622185216}
-  - component: {fileID: 5681265930368915554}
   m_Layer: 5
   m_Name: UI
   m_TagString: Untagged
@@ -174,37 +172,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &5009645338622185216
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1593292610724767659}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sceneId: 0
-  serverOnly: 0
-  m_AssetId: 
-  hasSpawned: 0
---- !u!114 &5681265930368915554
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1593292610724767659}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4039bd2086cb4704d99556a86ed1069a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  cam: {fileID: 1593292611421108860}
 --- !u!1 &1593292610905342646
 GameObject:
   m_ObjectHideFlags: 0
@@ -668,6 +635,7 @@ GameObject:
   - component: {fileID: 3180593739739760380}
   - component: {fileID: 3860326656022936771}
   - component: {fileID: 2659313278888001837}
+  - component: {fileID: 2934819269338243461}
   - component: {fileID: 2659313278888001836}
   - component: {fileID: 2659313278888001839}
   - component: {fileID: 8752279711704039346}
@@ -854,6 +822,20 @@ MonoBehaviour:
   shakeDuration: 0
   shakeAmount: 0.4
   decreaseFactor: 1
+--- !u!114 &2934819269338243461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2659313278888001833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4039bd2086cb4704d99556a86ed1069a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cam: {fileID: 1593292611421108860}
+  healthTrans: {fileID: 1593292610724767663}
 --- !u!54 &2659313278888001836
 Rigidbody:
   m_ObjectHideFlags: 0
