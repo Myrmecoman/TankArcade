@@ -361,10 +361,10 @@ MonoBehaviour:
     type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
-  spawnPrefabs: []
+  spawnPrefabs:
+  - {fileID: 7509555490936055671, guid: ee4b9f0a4c941c845aef3953672d8bec, type: 3}
   instances: 10
   PlayersPerRoom: 2
-  cam: {fileID: 4288808005224345840}
   gameScene: Assets/Scenes/MultiRoom.unity
 --- !u!114 &1714198010
 MonoBehaviour:

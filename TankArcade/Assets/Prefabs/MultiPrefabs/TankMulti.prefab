@@ -630,7 +630,6 @@ GameObject:
   - component: {fileID: 8063580996731177228}
   - component: {fileID: 4385117743960782325}
   - component: {fileID: 1974228692134523736}
-  - component: {fileID: 5032378287506642325}
   - component: {fileID: 5735478431965811613}
   - component: {fileID: 2885106057354705955}
   - component: {fileID: 3180593739739760380}
@@ -732,27 +731,12 @@ MonoBehaviour:
   cam: {fileID: 1593292611421108863}
   turret: {fileID: 7187399843030066627}
   camPivot: {fileID: 1593292610905342647}
-  shell: {fileID: 5215086079677553403, guid: 236f86bd281b81c459ae62e533146d7f, type: 3}
+  shell: {fileID: 7509555490936055671, guid: ee4b9f0a4c941c845aef3953672d8bec, type: 3}
   shellPos: {fileID: 1593292612304390187}
   MatDestroyed: {fileID: 2100000, guid: 403ddeb1073286742a3fa5b0332edb62, type: 2}
   healthBar: {fileID: 1593292611260835984}
   Smoke: {fileID: 5646485476504851485, guid: a2cad7838f439fa47af8f7b2a62f3f37, type: 3}
   destroyed: 0
---- !u!114 &5032378287506642325
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2659313278888001833}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23231ee644bb8e04db1e9934a8ceb5f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  turret: {fileID: 7187399843030066627}
 --- !u!114 &5735478431965811613
 MonoBehaviour:
   m_ObjectHideFlags: 0

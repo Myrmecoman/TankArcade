@@ -33,8 +33,9 @@ public class MultiTank : NetworkBehaviour
 	private InputManager im;
 
 	//stats
-	private float health = 100;
 	private float reloadTime = 0.5f;
+	[SyncVar]
+	private float health = 100;
 
 
 	void Awake()
@@ -62,6 +63,38 @@ public class MultiTank : NetworkBehaviour
 
 	void Update()
 	{
+		healthBar.SetHealth(health);
+		if (health <= 0)
+		{
+			Debug.Log("player tank destroyed");
+			destroyed = true;
+			gameObject.tag = "Untagged";
+			rig.isKinematic = false;
+			Destroy(healthBar.gameObject);
+			shake.shakeDuration = 0.2f;
+			explode.Play();
+			Instantiate(Smoke, transform.position, Quaternion.identity, transform);
+
+			// setting all mats to destroyed
+			// hull
+			Material[] mats = GetComponent<Renderer>().materials;
+			mats[0] = MatDestroyed;
+			mats[1] = MatDestroyed;
+			mats[2] = MatDestroyed;
+			GetComponent<Renderer>().materials = mats;
+			// turret
+			Material[] matsTurret = transform.GetChild(1).GetComponent<Renderer>().materials;
+			matsTurret[0] = MatDestroyed;
+			matsTurret[1] = MatDestroyed;
+			transform.GetChild(1).GetComponent<Renderer>().materials = matsTurret;
+			// gun
+			Material[] matsGun = transform.GetChild(1).GetChild(0).GetComponent<Renderer>().materials;
+			matsGun[0] = MatDestroyed;
+			transform.GetChild(1).GetChild(0).GetComponent<Renderer>().materials = matsGun;
+
+			Destroy(this);
+		}
+
 		if (isLocalPlayer)
 		{
 			RotValue = 0;
@@ -84,12 +117,8 @@ public class MultiTank : NetworkBehaviour
 			if (im.GetKey(KeybindingActions.shoot) && reloadTime >= 0.5)
 			{
 				reloadTime = 0;
-				Instantiate(shell, shellPos.position, shellPos.rotation, null);
+				CmdShot();
 			}
-		}
-		else
-		{
-
 		}
 	}
 
@@ -146,10 +175,6 @@ public class MultiTank : NetworkBehaviour
 
 			grounded = false;
 		}
-		else
-		{
-
-		}
 	}
 
 
@@ -163,42 +188,21 @@ public class MultiTank : NetworkBehaviour
 	public void HitbyShell(float dmg)
 	{
 		if (isLocalPlayer)
-		{
-			health -= dmg;
-			healthBar.SetHealth(health);
-			if (health <= 0)
-			{
-				Debug.Log("player tank destroyed");
-				destroyed = true;
-				gameObject.tag = "Untagged";
-				Destroy(healthBar.gameObject);
-				shake.shakeDuration = 0.2f;
-				explode.Play();
-				Instantiate(Smoke, transform.position, Quaternion.identity, transform);
+			CmdHit(dmg);
+	}
 
-				// setting all mats to destroyed
-				// hull
-				Material[] mats = GetComponent<Renderer>().materials;
-				mats[0] = MatDestroyed;
-				mats[1] = MatDestroyed;
-				mats[2] = MatDestroyed;
-				GetComponent<Renderer>().materials = mats;
-				// turret
-				Material[] matsTurret = transform.GetChild(1).GetComponent<Renderer>().materials;
-				matsTurret[0] = MatDestroyed;
-				matsTurret[1] = MatDestroyed;
-				transform.GetChild(1).GetComponent<Renderer>().materials = matsTurret;
-				// gun
-				Material[] matsGun = transform.GetChild(1).GetChild(0).GetComponent<Renderer>().materials;
-				matsGun[0] = MatDestroyed;
-				transform.GetChild(1).GetChild(0).GetComponent<Renderer>().materials = matsGun;
 
-				Destroy(this);
-			}
-		}
-		else
-		{
+	[Command]
+	public void CmdHit(float dmg)
+	{
+		health -= dmg;
+	}
 
-		}
+
+	[Command]
+	void CmdShot()
+	{
+		GameObject SHELL = Instantiate(shell, shellPos.position, shellPos.rotation, null);
+		NetworkServer.Spawn(SHELL);
 	}
 }
