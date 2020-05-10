@@ -63,6 +63,7 @@ public class MultiTank : NetworkBehaviour
 
 	void Update()
 	{
+		// health updated everytime as command answer takes time
 		healthBar.SetHealth(health);
 		if (health <= 0)
 		{
