@@ -35,7 +35,7 @@ public class MultiBullet : NetworkBehaviour
             collision.transform.GetComponent<MultiTank>().HitbyShell(damage);
             Destroy(gameObject);
         }
-        else if (collision.transform.tag == "Shell")
+        else if (collision.transform.tag == "Shell" || collision.transform.tag == "Player")
             Destroy(gameObject);
         else
         {

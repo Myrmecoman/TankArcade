@@ -22,14 +22,13 @@ public class MultiTank : NetworkBehaviour
 	[HideInInspector]
 	public bool destroyed = false;
 
-	private bool grounded = false;
 	private int horizontal;
 	private int vertical;
+	private float PivotValue;
 	private Rigidbody rig;
 	private CameraShake shake;
 	private AudioSource explode;
 	private int RotValue;
-	private float PivotValue;
 	private InputManager im;
 
 	//stats
@@ -38,24 +37,21 @@ public class MultiTank : NetworkBehaviour
 	private float health = 100;
 
 
-	void Awake()
-	{
-		rig = GetComponent<Rigidbody>();
-		shake = GetComponent<CameraShake>();
-		explode = GetComponent<AudioSource>();
-	}
-
-
 	void Start()
 	{
+		rig = GetComponent<Rigidbody>();
+		explode = GetComponent<AudioSource>();
+
 		if (isLocalPlayer)
 		{
+			shake = GetComponent<CameraShake>();
 			PivotValue = turret.eulerAngles.y;
 			im = InputManager.instance;
 		}
 		else
 		{
-			cam.gameObject.SetActive(false);
+			cam.enabled = false;
+			cam.gameObject.GetComponent<AudioListener>().enabled = false;
 			rig.isKinematic = true;
 		}
 	}
@@ -67,12 +63,13 @@ public class MultiTank : NetworkBehaviour
 		healthBar.SetHealth(health);
 		if (health <= 0)
 		{
+			if(isLocalPlayer)
+				shake.shakeDuration = 0.2f;
 			Debug.Log("player tank destroyed");
 			destroyed = true;
 			gameObject.tag = "Untagged";
 			rig.isKinematic = false;
 			Destroy(healthBar.gameObject);
-			shake.shakeDuration = 0.2f;
 			explode.Play();
 			Instantiate(Smoke, transform.position, Quaternion.identity, transform);
 
@@ -113,6 +110,7 @@ public class MultiTank : NetworkBehaviour
 			else
 				shellPos.localPosition = new Vector3(0, 0.5f, 2.5f);
 
+			// shooting
 			if (reloadTime < 0.5)
 				reloadTime += Time.deltaTime;
 			if (im.GetKey(KeybindingActions.shoot) && reloadTime >= 0.5)
@@ -131,7 +129,7 @@ public class MultiTank : NetworkBehaviour
 			// turret look at mouse
 			Plane playerPlane = new Plane(Vector3.up, turret.position);
 			Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-			float hitdist = 0.0f;
+			float hitdist = 0f;
 			if (playerPlane.Raycast(ray, out hitdist))
 			{
 				Vector3 targetPoint = ray.GetPoint(hitdist);
@@ -140,61 +138,52 @@ public class MultiTank : NetworkBehaviour
 			}
 
 			// tank movements
-			if (grounded)
+			horizontal = 0;
+			vertical = 0;
+			if (im.GetKey(KeybindingActions.forward))
+				vertical = 1;
+			if (im.GetKey(KeybindingActions.backward))
+				vertical = -1;
+			if (im.GetKey(KeybindingActions.left))
 			{
-				horizontal = 0;
-				vertical = 0;
-				if (im.GetKey(KeybindingActions.forward))
-					vertical = 1;
-				if (im.GetKey(KeybindingActions.backward))
-					vertical = -1;
-				if (im.GetKey(KeybindingActions.left))
-				{
-					if (vertical != 0)
-						horizontal = -1 * vertical;
-					else
-						horizontal = -1;
-				}
-				if (im.GetKey(KeybindingActions.right))
-				{
-					if (vertical != 0)
-						horizontal = 1 * vertical;
-					else
-						horizontal = 1;
-				}
-				transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + horizontal * Time.fixedDeltaTime * 150, 0);
-				Vector3 targetVelocity = new Vector3(0, 0, vertical);
-				targetVelocity = transform.TransformDirection(targetVelocity);
-				targetVelocity *= speed;
-				Vector3 velocity = rig.velocity;
-				Vector3 velocityChange = (targetVelocity - velocity);
-				velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
-				velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
-				velocityChange.y = 0;
-				rig.AddForce(velocityChange, ForceMode.VelocityChange);
+				if (vertical != 0)
+					horizontal = -1 * vertical;
+				else
+					horizontal = -1;
 			}
-
-			grounded = false;
+			if (im.GetKey(KeybindingActions.right))
+			{
+				if (vertical != 0)
+					horizontal = 1 * vertical;
+				else
+					horizontal = 1;
+			}
+			transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + horizontal * Time.fixedDeltaTime * 150, 0);
+			Vector3 targetVelocity = new Vector3(0, 0, vertical);
+			targetVelocity = transform.TransformDirection(targetVelocity);
+			targetVelocity *= speed;
+			Vector3 velocity = rig.velocity;
+			Vector3 velocityChange = (targetVelocity - velocity);
+			velocityChange.x = Mathf.Clamp(velocityChange.x, -maxVelocityChange, maxVelocityChange);
+			velocityChange.z = Mathf.Clamp(velocityChange.z, -maxVelocityChange, maxVelocityChange);
+			velocityChange.y = 0;
+			rig.AddForce(velocityChange, ForceMode.VelocityChange);
 		}
-	}
-
-
-	void OnCollisionStay()
-	{
-		if (isLocalPlayer)
-			grounded = true;
 	}
 
 
 	public void HitbyShell(float dmg)
 	{
-		if (isLocalPlayer)
-			CmdHit(dmg);
+		if (isServer)
+		{
+			Debug.Log("I am server and send hit");
+			RpcHit(dmg);
+		}
 	}
 
 
-	[Command]
-	public void CmdHit(float dmg)
+	[ClientRpc]
+	public void RpcHit(float dmg)
 	{
 		health -= dmg;
 	}
@@ -203,7 +192,7 @@ public class MultiTank : NetworkBehaviour
 	[Command]
 	void CmdShot()
 	{
-		GameObject SHELL = Instantiate(shell, shellPos.position, shellPos.rotation, null);
+		GameObject SHELL = Instantiate(shell, shellPos.position + rig.velocity, shellPos.rotation, null);
 		NetworkServer.Spawn(SHELL);
 	}
 }
