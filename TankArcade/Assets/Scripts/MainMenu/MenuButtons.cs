@@ -32,12 +32,12 @@ public class MenuButtons : MonoBehaviour
 
     public void LoadSolo()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(3);
     }
 
 
     public void LoadMulti()
     {
-        
+        SceneManager.LoadScene(1);
     }
 }

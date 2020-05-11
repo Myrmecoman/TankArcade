@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -352,7 +352,7 @@ MonoBehaviour:
   offlineScene: 
   onlineScene: 
   transport: {fileID: 1714198008}
-  networkAddress: localhost
+  networkAddress: 84.102.229.136
   maxConnections: 100
   disconnectInactiveConnections: 0
   disconnectInactiveTimeout: 60
@@ -360,10 +360,10 @@ MonoBehaviour:
   playerPrefab: {fileID: 2659313278888001833, guid: 3fa1072d21a4dc341921c7f098f5c41f,
     type: 3}
   autoCreatePlayer: 1
-  playerSpawnMethod: 0
+  playerSpawnMethod: 1
   spawnPrefabs:
   - {fileID: 7509555490936055671, guid: ee4b9f0a4c941c845aef3953672d8bec, type: 3}
-  instances: 10
+  instances: 3
   PlayersPerRoom: 2
   gameScene: Assets/Scenes/MultiRoom.unity
 --- !u!114 &1714198010
@@ -378,7 +378,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 128a3cb13b87d724793d35f8c281efe4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildServer: 0
+  buildServer: 1
   showGUI: 1
   offsetX: 0
   offsetY: 0

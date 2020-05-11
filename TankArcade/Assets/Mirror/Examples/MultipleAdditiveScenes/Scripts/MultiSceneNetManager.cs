@@ -55,8 +55,7 @@ namespace Mirror.Examples.MultipleAdditiveScenes
         /// </summary>
         public override void OnStartServer()
         {
-            if (mode == NetworkManagerMode.ClientOnly)
-                StartCoroutine(UnloadClientSubScenes());
+            StartCoroutine(LoadSubScenes());
         }
 
         IEnumerator LoadSubScenes()
