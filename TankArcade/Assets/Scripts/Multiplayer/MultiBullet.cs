@@ -8,7 +8,6 @@ public class MultiBullet : NetworkBehaviour
     public float speed = 10;
     public float time = 30;
     public int bounces = 3;
-    public float damage = 20;
 
     private Rigidbody rb;
 
@@ -28,14 +27,9 @@ public class MultiBullet : NetworkBehaviour
     }
 
 
-    private void OnCollisionEnter(Collision collision)
+    void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.tag == "Player")
-        {
-            collision.transform.GetComponent<MultiTank>().HitbyShell(damage);
-            Destroy(gameObject);
-        }
-        else if (collision.transform.tag == "Shell" || collision.transform.tag == "Player")
+        if (collision.transform.tag == "Shell")
             Destroy(gameObject);
         else
         {

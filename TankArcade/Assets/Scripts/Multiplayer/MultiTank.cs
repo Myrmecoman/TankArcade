@@ -65,7 +65,6 @@ public class MultiTank : NetworkBehaviour
 		{
 			if(isLocalPlayer)
 				shake.shakeDuration = 0.2f;
-			Debug.Log("player tank destroyed");
 			destroyed = true;
 			gameObject.tag = "Untagged";
 			rig.isKinematic = false;
@@ -100,7 +99,7 @@ public class MultiTank : NetworkBehaviour
 				RotValue = -1;
 			if (im.GetKey(KeybindingActions.camRight))
 				RotValue = 1;
-			PivotValue = PivotValue + RotValue * Time.deltaTime * 200;
+			PivotValue += RotValue * Time.deltaTime * 200;
 			camPivot.eulerAngles = new Vector3(0, PivotValue, 0);
 
 			if (turret.localEulerAngles.y >= 235 && turret.localEulerAngles.y <= 315)
@@ -129,8 +128,7 @@ public class MultiTank : NetworkBehaviour
 			// turret look at mouse
 			Plane playerPlane = new Plane(Vector3.up, turret.position);
 			Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-			float hitdist = 0f;
-			if (playerPlane.Raycast(ray, out hitdist))
+			if (playerPlane.Raycast(ray, out float hitdist))
 			{
 				Vector3 targetPoint = ray.GetPoint(hitdist);
 				Quaternion targetRotation = Quaternion.LookRotation(targetPoint - turret.position);
@@ -172,18 +170,19 @@ public class MultiTank : NetworkBehaviour
 	}
 
 
-	public void HitbyShell(float dmg)
+	void OnCollisionEnter(Collision collision)
 	{
-		if (isServer)
+		if (collision.transform.CompareTag("Shell"))
 		{
-			Debug.Log("I am server and send hit");
-			RpcHit(dmg);
+			if(isLocalPlayer)
+				CmdHit(20);
+			Destroy(collision.gameObject);
 		}
 	}
 
 
-	[ClientRpc]
-	public void RpcHit(float dmg)
+	[Command]
+	public void CmdHit(float dmg)
 	{
 		health -= dmg;
 	}
@@ -192,7 +191,7 @@ public class MultiTank : NetworkBehaviour
 	[Command]
 	void CmdShot()
 	{
-		GameObject SHELL = Instantiate(shell, shellPos.position + rig.velocity, shellPos.rotation, null);
+		GameObject SHELL = Instantiate(shell, shellPos.position, shellPos.rotation, null);
 		NetworkServer.Spawn(SHELL);
 	}
 }
