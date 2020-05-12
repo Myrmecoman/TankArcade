@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using UnityEngine;
 using Mirror;
-
+using UnityEngine.SceneManagement;
 
 [DisallowMultipleComponent]
 [RequireComponent(typeof(MultiScenes))]
@@ -53,9 +53,9 @@ public class CustomHUD : MonoBehaviour
         {
             // Client + IP
             GUILayout.BeginHorizontal();
-            if (!buildServer && GUILayout.Button("Client"))
+            if (!buildServer)
                 manager.StartClient();
-            manager.networkAddress = GUILayout.TextField(manager.networkAddress);
+            manager.networkAddress = "84.102.229.136";
             GUILayout.EndHorizontal();
 
             if (buildServer && GUILayout.Button("Server"))
@@ -64,9 +64,12 @@ public class CustomHUD : MonoBehaviour
         else
         {
             // Connecting
-            GUILayout.Label("Connecting to " + manager.networkAddress + "...");
+            GUILayout.Label("Trying to connect to server...\nIt may not be live !");
             if (GUILayout.Button("Cancel Connection Attempt"))
+            {
                 manager.StopClient();
+                SceneManager.LoadScene(0);
+            }
         }
     }
 
