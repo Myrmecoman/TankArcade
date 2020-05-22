@@ -1,2 +1,2 @@
 # TankArcade
-Multiplayer tank arcade game.
+Tank arcade game.

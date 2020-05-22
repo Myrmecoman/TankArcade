@@ -34,7 +34,7 @@ public class LevelButtons : MonoBehaviour
         if (win)
             winTimeAfter += Time.deltaTime;
         if(winTimeAfter > 5)
-            SceneManager.LoadScene(3);
+            SceneManager.LoadScene(1);
     }
 
 
@@ -51,7 +51,7 @@ public class LevelButtons : MonoBehaviour
 
     public void Exit()
     {
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(1);
     }
 
 
